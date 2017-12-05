@@ -52,7 +52,44 @@ function doChecksum(matrix) {
   return sum;
 }
 
-var sampleMatrix = ["5 1 9 5", "7 5 3", "2 4 6 8"];
+//var sampleMatrix = ["5 1 9 5", "7 5 3", "2 4 6 8"];
+//
+//console.log(doChecksum(listOfStringsToMatrix(sampleMatrix)));
+//console.log(doChecksum(listOfStringsToMatrix(testInput)));
 
-console.log(doChecksum(listOfStringsToMatrix(sampleMatrix)));
-console.log(doChecksum(listOfStringsToMatrix(testInput)));
+// Part 2
+
+function checksumRowPart2(row) {
+  var lowestNumber = row[0];
+  var highestNumber = row[0];
+
+  // For each pair of cells...
+  for (var i = 0; i < row.length; i++) {
+    for (var j = i + 1; j < row.length; j++) {
+      // Compare the two cells, to see if they divide into each other      
+      var lower = row[i];
+      var higher = row[j];
+      if (higher < lower) {
+        var lower = row[j];
+        var higher = row[i];
+      }
+
+      if (higher % lower === 0) {
+        return higher / lower;
+      }
+    }
+  }
+}
+
+function doChecksumPart2(matrix) {
+  var sum = 0;
+  for (var rowIndex in matrix) {
+    sum += checksumRowPart2(matrix[rowIndex]);
+  }
+  return sum;
+}
+
+var sampleMatrixPart2 = ["5 9 2 8", "9 4 7 3", "3 8 6 5"];
+
+console.log(doChecksumPart2(listOfStringsToMatrix(sampleMatrixPart2)));
+console.log(doChecksumPart2(listOfStringsToMatrix(testInput)));

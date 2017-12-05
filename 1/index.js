@@ -20,8 +20,30 @@ function doCaptcha(input) {
   return sumValue;
 }
 
-console.log(doCaptcha("1122"));
-console.log(doCaptcha("1111"));
-console.log(doCaptcha("1234"));
-console.log(doCaptcha("91212129"));
-console.log(doCaptcha(testInput));
+//console.log(doCaptcha("1122"));
+//console.log(doCaptcha("1111"));
+//console.log(doCaptcha("1234"));
+//console.log(doCaptcha("91212129"));
+//console.log(doCaptcha(testInput));
+
+function doCaptchaPart2(input) {
+  var chars = input.split('');
+
+  var sumValue = 0;
+  for (var index = 0; index < (chars.length / 2); index++) {
+    if (chars[index] == chars[index + (chars.length / 2)]) {
+      sumValue += parseInt(chars[index]);  
+    }
+  }
+
+  // We only check the first half, the second half matches whatever pattern
+  // occurs in the first half.
+  return sumValue * 2;
+}
+
+console.log(doCaptchaPart2("1212"));
+console.log(doCaptchaPart2("1221"));
+console.log(doCaptchaPart2("123425"));
+console.log(doCaptchaPart2("123123"));
+console.log(doCaptchaPart2("12131415"));
+console.log(doCaptchaPart2(testInput));
